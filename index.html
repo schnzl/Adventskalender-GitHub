@@ -219,36 +219,39 @@
       <div class="rahmen seiten" id="right"></div>
     </div>
     <audio class="Ton">
-      <audio id="01" src="01_EndeKorridor.mp3" type="audio/ogg"></audio>
-      <audio id="02" src="02_Drei Gedichte.mp3" type="audio/ogg"></audio>
-      <audio id="03" src="03_kleiner Nick.mp3" type="audio/ogg"></audio>
-      <audio id="04" src="04_Kungahälla.mp3" type="audio/ogg"></audio>
-      <audio id="05" src="" type="audio/ogg"></audio>
-      <audio id="06" src="" type="audio/ogg"></audio>
+      <audio id="00" src="00_Einleitung.mp3" type="audio/mpeg"></audio>
+      <audio id="01" src="01_EndeKorridor.mp3" type="audio/mpeg"></audio>
+      <audio id="02" src="02_Drei Gedichte.mp3" type="audio/mpeg"></audio>
+      <audio id="03" src="03_kleiner Nick.mp3" type="audio/mpeg"></audio>
+      <audio id="04" src="04_Kungahälla.mp3" type="audio/mpeg"></audio>
+      <audio id="05" src="05_EndeEinerLangenReise" type="audio/mpeg"></audio>
+      <audio id="06" src="06_EndeEinerLangenReise2" type="audio/mpeg"></audio>
       <audio
         id="07"
         src="07_WaldkniginKomprimiert.mp3"
-        type="audio/ogg"
+        type="audio/mpeg"
       ></audio>
-      <audio id="08" src="" type="audio/ogg"></audio>
-      <audio id="09" src="09_GrassAdvent.mp3" type="audio/ogg"></audio>
-      <audio id="10" src="10_Kchenschabe.mp3" type="audio/ogg"></audio>
-      <audio id="11" src="" type="audio/ogg"></audio>
-      <audio id="12" src="" type="audio/ogg"></audio>
-      <audio id="13" src="" type="audio/ogg"></audio>
-      <audio id="14" src="" type="audio/ogg"></audio>
-      <audio id="15" src="" type="audio/ogg"></audio>
-      <audio id="16" src="" type="audio/ogg"></audio>
-      <audio id="17" src="" type="audio/ogg"></audio>
-      <audio id="18" src="" type="audio/ogg"></audio>
-      <audio id="19" src="" type="audio/ogg"></audio>
-      <audio id="20" src="" type="audio/ogg"></audio>
-      <audio id="21" src="" type="audio/ogg"></audio>
-      <audio id="22" src="" type="audio/ogg"></audio>
-      <audio id="23" src="" type="audio/ogg"></audio>
-      <audio id="24" src="" type="audio/ogg"></audio>
+      <audio id="08" src="08_EndePeripherie" type="audio/mpeg"></audio>
+      <audio id="09" src="09_GrassAdvent.mp3" type="audio/mpeg"></audio>
+      <audio id="10" src="10_Kchenschabe.mp3" type="audio/mpeg"></audio>
+      <audio id="11" src="" type="audio/mpeg"></audio>
+      <audio id="12" src="" type="audio/mpeg"></audio>
+      <audio id="13" src="" type="audio/mpeg"></audio>
+      <audio id="14" src="" type="audio/mpeg"></audio>
+      <audio id="15" src="" type="audio/mpeg"></audio>
+      <audio id="16" src="" type="audio/mpeg"></audio>
+      <audio id="17" src="" type="audio/mpeg"></audio>
+      <audio id="18" src="" type="audio/mpeg"></audio>
+      <audio id="19" src="" type="audio/mpeg"></audio>
+      <audio id="20" src="" type="audio/mpeg"></audio>
+      <audio id="21" src="" type="audio/mpeg"></audio>
+      <audio id="22" src="" type="audio/mpeg"></audio>
+      <audio id="23" src="" type="audio/mpeg"></audio>
+      <audio id="24" src="" type="audio/mpeg"></audio>
+      <audio id="XX" src="XX_Test.mp3" type="audio/mpeg"></audio>
     </audio>
 
+      <!-- Knöpfe -->
     <div>
       <button class="button inaccessible" onclick="playAudio01()" id="b01">
         Numero Uno
@@ -339,6 +342,27 @@
     >
       Un calendario del adviento para Judith
     </h1>
+    <button
+      class="button explain"
+      style="position: fixed; bottom: 8px; left: 8px; z-index: 5;"
+      onclick="playAudio00()"
+    >
+      bitte was
+    </button>
+    <button
+      id="XX"
+      style="
+        position: absolute;
+        height: 16px;
+        width: 16px;
+        top: 30vh;
+        left: 67vh;
+        border: 0px solid rgba(0, 128, 0, 0);
+        background-color: rgba(0, 0, 0, 0.03);
+        cursor: pointer;
+      "
+      onclick="playAudioXX()"
+    ></button>
   </body>
 </html>
 
@@ -346,6 +370,7 @@
   Ton abspielen
 -->
 <script>
+  var Ton00 = document.getElementById("00");
   var Ton01 = document.getElementById("01");
   var Ton02 = document.getElementById("02");
   var Ton03 = document.getElementById("03");
@@ -370,7 +395,11 @@
   var Ton22 = document.getElementById("22");
   var Ton23 = document.getElementById("23");
   var Ton24 = document.getElementById("24");
+  var TonXX = document.getElementById("XX");
 
+  function playAudio00() {
+    return Ton00.paused ? Ton00.play() : Ton00.pause();
+  }
   function playAudio01() {
     return Ton01.paused ? Ton01.play() : Ton01.pause();
   }
@@ -443,12 +472,14 @@
   function playAudio24() {
     return Ton24.paused ? Ton24.play() : Ton24.pause();
   }
+  function playAudioXX() {
+    return TonXX.paused ? TonXX.play() : TonXX.pause();
+  }
 </script>
 
 <!--
   draggable Element
 -->
-
 <script>
   var element = document.getElementById("box");
 
@@ -688,7 +719,4 @@
       today.classList.remove("inaccessible");
     }
   }
-  // wenn du superschlau bist, machst
-  // du zusätzlich noch ein array:
-  // https://www.w3schools.com/js/js_array_iteration.asp
 </script>
