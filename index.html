@@ -1,0 +1,694 @@
+<style>
+  body {
+    background-color: green;
+    margin: 0;
+  }
+  #box {
+    top: 8px;
+    left: 8px;
+    border: 2px solid #60a1d6;
+    width: 300px;
+    height: 150px;
+    position: absolute;
+    text-align: center;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  #boxheader {
+    top: 8px;
+    left: 8px;
+    padding: 10px;
+    cursor: move;
+    z-index: 3;
+    background-color: #60a1d6;
+    pointer-events: auto;
+  }
+
+  .button {
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid #9e0d0d;
+    margin: 5px;
+    position: relative;
+  }
+  .button:hover {
+    background-color: #9e0d0d;
+    color: white;
+  }
+  .inaccessible {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .rahmen {
+    background: brown;
+    z-index: 1;
+    position: fixed;
+  }
+  #left {
+    left: 0;
+    top: 0;
+    width: 8px;
+    height: 100%;
+  }
+  #top {
+    left: 0;
+    top: 0;
+    height: 8px;
+    width: 100%;
+  }
+  #right {
+    top: 0;
+    right: 0;
+    width: calc(100% - 310px);
+    height: 100%;
+  }
+  #bottom {
+    left: 0;
+    bottom: 0;
+    height: calc(100% - 160px);
+    width: 100%;
+  }
+</style>
+
+<!--
+  Position der Knöpfe
+-->
+<style>
+  #b01 {
+    position: absolute;
+    top: 35vh;
+    left: 67vw;
+  }
+  #b02 {
+    position: absolute;
+    top: 82vh;
+    left: 12vw;
+  }
+  #b03 {
+    position: absolute;
+    top: 47vh;
+    left: 32vw;
+  }
+  #b04 {
+    position: absolute;
+    top: 11vh;
+    left: 34vw;
+  }
+  #b05 {
+    position: absolute;
+    top: 65vh;
+    left: 5vw;
+  }
+  #b06 {
+    position: absolute;
+    top: 65vh;
+    left: 87vw;
+  }
+  #b07 {
+    position: absolute;
+    top: 92vh;
+    left: 72vw;
+  }
+  #b08 {
+    position: absolute;
+    top: 59vh;
+    left: 62vw;
+  }
+  #b09 {
+    position: absolute;
+    top: 79vh;
+    left: 49vw;
+  }
+  #b10 {
+    position: absolute;
+    top: 10vh;
+    left: 90vw;
+  }
+  #b11 {
+    position: absolute;
+    top: 23vh;
+    left: 10vw;
+  }
+  #b12 {
+    position: absolute;
+    top: 17vh;
+    left: 59vw;
+  }
+  #b13 {
+    position: absolute;
+    top: 70vh;
+    left: 33vw;
+  }
+  #b14 {
+    position: absolute;
+    top: 44vh;
+    left: 90vw;
+  }
+  #b15 {
+    position: absolute;
+    top: 43vh;
+    left: 45vw;
+  }
+  #b16 {
+    position: absolute;
+    top: 3vh;
+    left: 56vw;
+  }
+  #b17 {
+    position: absolute;
+    top: 45vh;
+    left: 15vw;
+  }
+  #b18 {
+    position: absolute;
+    top: 88vh;
+    left: 23vw;
+  }
+  #b19 {
+    position: absolute;
+    top: 87vh;
+    left: 87vw;
+  }
+  #b20 {
+    position: absolute;
+    top: 23vh;
+    left: 40vw;
+  }
+  #b21 {
+    position: absolute;
+    top: 17vh;
+    left: 76vw;
+  }
+  #b22 {
+    position: absolute;
+    top: 25vh;
+    left: 25vw;
+  }
+  #b23 {
+    position: absolute;
+    top: 3vh;
+    left: 23vw;
+  }
+  #b24 {
+    position: absolute;
+    top: 73vh;
+    left: 69vw;
+  }
+</style>
+
+<html lang="de">
+  <head>
+    <title>Ein Adventskalender</title>
+  </head>
+  <body id="body">
+    <div id="box">
+      <div id="boxheader"></div>
+    </div>
+    <div>
+      <div class="rahmen header" id="top"></div>
+      <div class="rahmen header" id="bottom"></div>
+      <div class="rahmen seiten" id="left"></div>
+      <div class="rahmen seiten" id="right"></div>
+    </div>
+    <audio class="Ton">
+      <audio id="01" src="01_EndeKorridor.mp3" type="audio/ogg"></audio>
+      <audio id="02" src="02_Drei Gedichte.mp3" type="audio/ogg"></audio>
+      <audio id="03" src="03_kleiner Nick.mp3" type="audio/ogg"></audio>
+      <audio id="04" src="04_Kungahälla.mp3" type="audio/ogg"></audio>
+      <audio id="05" src="" type="audio/ogg"></audio>
+      <audio id="06" src="" type="audio/ogg"></audio>
+      <audio
+        id="07"
+        src="07_WaldkniginKomprimiert.mp3"
+        type="audio/ogg"
+      ></audio>
+      <audio id="08" src="" type="audio/ogg"></audio>
+      <audio id="09" src="09_GrassAdvent.mp3" type="audio/ogg"></audio>
+      <audio id="10" src="10_Kchenschabe.mp3" type="audio/ogg"></audio>
+      <audio id="11" src="" type="audio/ogg"></audio>
+      <audio id="12" src="" type="audio/ogg"></audio>
+      <audio id="13" src="" type="audio/ogg"></audio>
+      <audio id="14" src="" type="audio/ogg"></audio>
+      <audio id="15" src="" type="audio/ogg"></audio>
+      <audio id="16" src="" type="audio/ogg"></audio>
+      <audio id="17" src="" type="audio/ogg"></audio>
+      <audio id="18" src="" type="audio/ogg"></audio>
+      <audio id="19" src="" type="audio/ogg"></audio>
+      <audio id="20" src="" type="audio/ogg"></audio>
+      <audio id="21" src="" type="audio/ogg"></audio>
+      <audio id="22" src="" type="audio/ogg"></audio>
+      <audio id="23" src="" type="audio/ogg"></audio>
+      <audio id="24" src="" type="audio/ogg"></audio>
+    </audio>
+
+    <div>
+      <button class="button inaccessible" onclick="playAudio01()" id="b01">
+        Numero Uno
+      </button>
+      <button class="button inaccessible" onclick="playAudio02()" id="b02">
+        Two
+      </button>
+      <button class="button inaccessible" onclick="playAudio03()" id="b03">
+        3
+      </button>
+      <button class="button inaccessible" onclick="playAudio04()" id="b04">
+        #4
+      </button>
+      <button class="button inaccessible" onclick="playAudio05()" id="b05">
+        05.12.
+      </button>
+      <button class="button inaccessible" onclick="playAudio06()" id="b06">
+        Nikolaus!
+      </button>
+      <button class="button inaccessible" onclick="playAudio07()" id="b07">
+        00110111
+      </button>
+      <button class="button inaccessible" onclick="playAudio08()" id="b08">
+        VIII
+      </button>
+      <button class="button inaccessible" onclick="playAudio09()" id="b09">
+        10-1
+      </button>
+      <button class="button inaccessible" onclick="playAudio10()" id="b10">
+        Doce
+      </button>
+      <button class="button inaccessible" onclick="playAudio11()" id="b11">
+        Onetyone
+      </button>
+      <button class="button inaccessible" onclick="playAudio12()" id="b12">
+        Ein Dutzend
+      </button>
+      <button class="button inaccessible" onclick="playAudio13()" id="b13">
+        Uh-oh, Pechtag
+      </button>
+      <button class="button inaccessible" onclick="playAudio14()" id="b14">
+        14
+      </button>
+      <button class="button inaccessible" onclick="playAudio15()" id="b15">
+        Fuffzehn
+      </button>
+      <button class="button inaccessible" onclick="playAudio16()" id="b16">
+        Bestes Datum
+      </button>
+      <button class="button inaccessible" onclick="playAudio17()" id="b17">
+        Ziebzehn
+      </button>
+      <button class="button inaccessible" onclick="playAudio18()" id="b18">
+        Ausschlussverfahren
+      </button>
+      <button class="button inaccessible" onclick="playAudio19()" id="b19">
+        dix-neuf
+      </button>
+      <button class="button inaccessible" onclick="playAudio20()" id="b20">
+        Fck 20(20)
+      </button>
+      <button class="button inaccessible" onclick="playAudio21()" id="b21">
+        legal drinking age
+      </button>
+      <button class="button inaccessible" onclick="playAudio22()" id="b22">
+        ikosi dio
+      </button>
+      <button class="button inaccessible" onclick="playAudio23()" id="b23">
+        Fast soweit
+      </button>
+      <button class="button inaccessible" onclick="playAudio24()" id="b24">
+        Heiligabend :)
+      </button>
+    </div>
+    <h1
+      class="Überschrift"
+      style="
+        position: absolute;
+        top: 83px;
+        left: 8px;
+        width: 300px;
+        height: 150;
+        margin-top: -1em;
+        margin-left: 8px;
+        color: white;
+        pointer-events: none;
+      "
+    >
+      Un calendario del adviento para Judith
+    </h1>
+  </body>
+</html>
+
+<!--
+  Ton abspielen
+-->
+<script>
+  var Ton01 = document.getElementById("01");
+  var Ton02 = document.getElementById("02");
+  var Ton03 = document.getElementById("03");
+  var Ton04 = document.getElementById("04");
+  var Ton05 = document.getElementById("05");
+  var Ton06 = document.getElementById("06");
+  var Ton07 = document.getElementById("07");
+  var Ton08 = document.getElementById("08");
+  var Ton09 = document.getElementById("09");
+  var Ton10 = document.getElementById("10");
+  var Ton11 = document.getElementById("11");
+  var Ton12 = document.getElementById("12");
+  var Ton13 = document.getElementById("13");
+  var Ton14 = document.getElementById("14");
+  var Ton15 = document.getElementById("15");
+  var Ton16 = document.getElementById("16");
+  var Ton17 = document.getElementById("17");
+  var Ton18 = document.getElementById("18");
+  var Ton19 = document.getElementById("19");
+  var Ton20 = document.getElementById("20");
+  var Ton21 = document.getElementById("21");
+  var Ton22 = document.getElementById("22");
+  var Ton23 = document.getElementById("23");
+  var Ton24 = document.getElementById("24");
+
+  function playAudio01() {
+    return Ton01.paused ? Ton01.play() : Ton01.pause();
+  }
+  function playAudio02() {
+    return Ton02.paused ? Ton02.play() : Ton02.pause();
+  }
+  function playAudio03() {
+    return Ton03.paused ? Ton03.play() : Ton03.pause();
+  }
+  function playAudio04() {
+    return Ton04.paused ? Ton04.play() : Ton05.pause();
+  }
+  function playAudio05() {
+    return Ton05.paused ? Ton05.play() : Ton05.pause();
+  }
+  function playAudio06() {
+    return Ton06.paused ? Ton06.play() : Ton06.pause();
+  }
+  function playAudio07() {
+    return Ton01.paused ? Ton01.play() : Ton01.pause();
+  }
+  function playAudio08() {
+    return Ton08.paused ? Ton08.play() : Ton08.pause();
+  }
+  function playAudio09() {
+    return Ton09.paused ? Ton09.play() : Ton09.pause();
+  }
+  function playAudio10() {
+    return Ton10.paused ? Ton10.play() : Ton10.pause();
+  }
+  function playAudio11() {
+    return Ton11.paused ? Ton11.play() : Ton11.pause();
+  }
+  function playAudio12() {
+    return Ton12.paused ? Ton12.play() : Ton12.pause();
+  }
+  function playAudio13() {
+    return Ton13.paused ? Ton13.play() : Ton13.pause();
+  }
+  function playAudio14() {
+    return Ton14.paused ? Ton14.play() : Ton14.pause();
+  }
+  function playAudio15() {
+    return Ton15.paused ? Ton15.play() : Ton15.pause();
+  }
+  function playAudio16() {
+    return Ton16.paused ? Ton16.play() : Ton16.pause();
+  }
+  function playAudio17() {
+    return Ton17.paused ? Ton17.play() : Ton17.pause();
+  }
+  function playAudio18() {
+    return Ton18.paused ? Ton18.play() : Ton18.pause();
+  }
+  function playAudio19() {
+    return Ton19.paused ? Ton19.play() : Ton19.pause();
+  }
+  function playAudio20() {
+    return Ton20.paused ? Ton20.play() : Ton20.pause();
+  }
+  function playAudio21() {
+    return Ton21.paused ? Ton21.play() : Ton21.pause();
+  }
+  function playAudio22() {
+    return Ton22.paused ? Ton22.play() : Ton22.pause();
+  }
+  function playAudio23() {
+    return Ton23.paused ? Ton23.play() : Ton23.pause();
+  }
+  function playAudio24() {
+    return Ton24.paused ? Ton24.play() : Ton24.pause();
+  }
+</script>
+
+<!--
+  draggable Element
+-->
+
+<script>
+  var element = document.getElementById("box");
+
+  draggable(element);
+
+  if (document.getElementById(elmnt.id + "header")) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id + "header").onmousedown = draggable;
+  } else {
+    // otherwise, move the DIV from anywhere inside the DIV:
+    elmnt.onmousedown = draggable;
+  }
+
+  function draggable(element) {
+    var isMouseDown = false;
+
+    // initial mouse X and Y for `mousedown`
+    var mouseX;
+    var mouseY;
+
+    // element X and Y before and after move
+    var elementX = 0;
+    var elementY = 0;
+
+    element.addEventListener("mousedown", onMouseDown);
+    function onMouseDown(event) {
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+      isMouseDown = true;
+    }
+
+    element.addEventListener("mouseup", onMouseUp);
+    function onMouseUp(event) {
+      isMouseDown = false;
+      elementX = parseInt(element.style.left) || 0;
+      elementY = parseInt(element.style.top) || 0;
+    }
+
+    var left = document.getElementById("left");
+    var top = document.getElementById("top");
+    var right = document.getElementById("right");
+    var bottom = document.getElementById("bottom");
+
+    document.addEventListener("mousemove", onMouseMove);
+    function onMouseMove(event) {
+      if (!isMouseDown) return;
+      var deltaX = event.clientX - mouseX;
+      var deltaY = event.clientY - mouseY;
+
+      element.style.left = elementX + deltaX + "px";
+      element.style.top = elementY + deltaY + "px";
+      left.style.width = elementX + deltaX + "px";
+      top.style.height = elementY + deltaY + "px";
+      right.style.left = elementX + deltaX + 302 + "px";
+      bottom.style.top = elementY + deltaY + 152 + "px";
+    }
+  }
+</script>
+
+<!--
+  Knopf nur ab bestimmtem Datum
+-->
+<script>
+  // get day and month
+  var day = new Date().getDate();
+  var month = new Date().getMonth();
+
+  // if month EQUALS december, activate the button
+  // month 11 = december
+  if (month == 11) {
+    //if day is SMALLER or EQUAL 1st of december
+    if (day >= 1) {
+      // get the first element
+      var today = document.getElementById("b01");
+      // remove class so it becomes clickable
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 2) {
+      var today = document.getElementById("b02");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 3) {
+      var today = document.getElementById("b03");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 4) {
+      var today = document.getElementById("b04");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 5) {
+      var today = document.getElementById("b05");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 6) {
+      var today = document.getElementById("b06");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 7) {
+      var today = document.getElementById("b07");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 8) {
+      var today = document.getElementById("b08");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 9) {
+      var today = document.getElementById("b09");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 10) {
+      var today = document.getElementById("b10");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 11) {
+      var today = document.getElementById("b11");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 12) {
+      var today = document.getElementById("b12");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 13) {
+      var today = document.getElementById("b13");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 14) {
+      var today = document.getElementById("b14");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 15) {
+      var today = document.getElementById("b15");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 16) {
+      var today = document.getElementById("b16");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 17) {
+      var today = document.getElementById("b17");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 18) {
+      var today = document.getElementById("b18");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 19) {
+      var today = document.getElementById("b19");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 20) {
+      var today = document.getElementById("b20");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 21) {
+      var today = document.getElementById("b21");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 22) {
+      var today = document.getElementById("b22");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 23) {
+      var today = document.getElementById("b23");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  if (month == 11) {
+    if (day >= 24) {
+      var today = document.getElementById("b24");
+
+      today.classList.remove("inaccessible");
+    }
+  }
+  // wenn du superschlau bist, machst
+  // du zusätzlich noch ein array:
+  // https://www.w3schools.com/js/js_array_iteration.asp
+</script>
