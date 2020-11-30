@@ -482,6 +482,7 @@
 -->
 <script>
   var element = document.getElementById("box");
+var body = document.getElementById("body");
 
   draggable(element);
 
@@ -511,7 +512,7 @@
       isMouseDown = true;
     }
 
-    element.addEventListener("mouseup", onMouseUp);
+    body.addEventListener("mouseup", onMouseUp);
     function onMouseUp(event) {
       isMouseDown = false;
       elementX = parseInt(element.style.left) || 0;
@@ -549,7 +550,7 @@
 
   // if month EQUALS december, activate the button
   // month 11 = december
-  if (month == 10) {
+  if (month == 11) {
     //if day is SMALLER or EQUAL 1st of december
     if (day >= 1) {
       // get the first element
