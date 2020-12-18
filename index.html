@@ -55,6 +55,10 @@
     opacity: 0.5;
     pointer-events: none;
   }
+  .hidden {
+    display: none;
+    pointer-events: none;
+  }
 
   .rahmen {
     background: brown;
@@ -211,6 +215,11 @@
     top: 73vh;
     left: 69vw;
   }
+    #b24_2 {
+        position: absolute;
+    top: 78vh;
+    left: 69vw;
+    }
 </style>
 
 <html lang="de">
@@ -332,8 +341,11 @@
       <button class="button inaccessible" onclick="playAudio23()" id="b23">
         Fast soweit
       </button>
-      <button class="button inaccessible" onclick="playAudio24()" id="b24">
+      <button class="button inaccessible" onclick="showButton()" onclick="playAudio24" id="b24">
         Heiligabend :)
+      </button>
+      <button class="button hidden" onclick="playVideo24()" id="b24_2">
+        Heiligabend 2?
       </button>
     </div>
     <h1
@@ -482,6 +494,12 @@
   function playAudio24() {
     return Ton24.paused ? Ton24.play() : Ton24.pause();
   }
+  function showButton() {
+    document.getElementById("b24_2").style.display = "inline";
+  }
+  function playVideo24 () {
+    return Bild24.paused ? Bild24.play() : Bild24.pause();
+    }
   function playAudioXX() {
     return TonXX.paused ? TonXX.play() : TonXX.pause();
   }
@@ -492,7 +510,7 @@
 -->
 <script>
   var element = document.getElementById("box");
-var body = document.getElementById("body");
+  var body = document.getElementById("body");
 
   draggable(element);
 
@@ -730,8 +748,18 @@ var body = document.getElementById("body");
       today.classList.remove("inaccessible");
     }
   }
+    if (month == 11) {
+    //if day is SMALLER or EQUAL 1st of december
+    if (day >= 24) {
+      // get the first element
+      var today = document.getElementById("b24_2");
+      // remove class so it becomes clickable
+      today.classList.remove("hidden");
+    }
+  }
 </script>
 
+<!-- Schnee -->
 <script>
 document.addEventListener('DOMContentLoaded', function(){
     var script = document.createElement('script');
