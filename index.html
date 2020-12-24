@@ -33,6 +33,15 @@
     background-color: #60a1d6;
     pointer-events: auto;
   }
+  
+  .DasLetzte {
+    display: none;
+    z-index: 10;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
   .button {
     padding: 15px 32px;
@@ -53,10 +62,6 @@
   }
   .inaccessible {
     opacity: 0.5;
-    pointer-events: none;
-  }
-  .hidden {
-    display: none;
     pointer-events: none;
   }
 
@@ -266,12 +271,9 @@
       <audio id="21" src="21_Gefängnis.mp3" type="audio/mpeg"></audio>
       <audio id="22" src="22_TucholskyReisen.mp3" type="audio/mpeg"></audio>
       <audio id="23" src="23_Aschenbechergymastik.mp3" type="audio/mpeg"></audio>
-      <audio id="24" src="" type="audio/mpeg"></audio>
+      <audio id="24" src="24_Wegweiser.mp3" type="audio/mpeg"></audio>
       <audio id="XX" src="XX_Test.mp3" type="audio/mpeg"></audio>
     </audio>
-    <video class="Bild">
-        <video id="24_2" src="24_2_VLog.mp4" type="video/mp4"></video>
-    </video>
 
       <!-- Knöpfe -->
     <div>
@@ -344,12 +346,15 @@
       <button class="button inaccessible" onclick="playAudio23()" id="b23">
         Fast soweit
       </button>
-      <button class="button inaccessible" onclick="showButton()" onclick="playAudio24" id="b24">
+      <button class="button inaccessible" onclick="playAudio24();setTimeout(showButton, 2871000)" id="b24">
         Heiligabend :)
       </button>
-      <button class="button hidden" onclick="playVideo24()" id="b24_2">
-        Heiligabend 2?
-      </button>
+    </div>
+    <div class="DasLetzte" id="DasLetzte"
+         style="background-color: green; border: 2px solid #9e0d0d; margin: 5px; padding: 15px 32px; color: white; width: 400px; height: 200px; ">
+      <div style="font-family: Freestyle Script; font-size: 120px;">Das wars!</div>
+        <p></p>
+        <div style="font-size: xx-small; color: lightgreen">(zumindestens für dieses Jahr...)</div>
     </div>
     <h1
       class="Überschrift"
@@ -420,7 +425,6 @@
   var Ton22 = document.getElementById("22");
   var Ton23 = document.getElementById("23");
   var Ton24 = document.getElementById("24");
-  var Bild24 = document.getElementById("24_2");
   var TonXX = document.getElementById("XX");
 
   function playAudio00() {
@@ -499,11 +503,8 @@
     return Ton24.paused ? Ton24.play() : Ton24.pause();
   }
   function showButton() {
-    document.getElementById("b24_2").style.display = "inline";
+    document.getElementById("DasLetzte").style.display = "inline";
   }
-  function playVideo24 () {
-    return Bild24.paused ? Bild24.play() : Bild24.pause();
-    }
   function playAudioXX() {
     return TonXX.paused ? TonXX.play() : TonXX.pause();
   }
