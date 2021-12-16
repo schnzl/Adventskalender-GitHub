@@ -64,6 +64,15 @@
     opacity: 0.2;
     pointer-events: none;
   }
+  .evaluation {
+    position: fixed;
+    bottom: 8px;
+    left: 50%;
+    -moz-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    z-index: 5;  
+  }
 
   .rahmen {
     background: #9e0d0d;
@@ -409,11 +418,24 @@
       
     <button
       class="button Archiv"
-      style="position: fixed; bottom: 8px; right: 8px; z-index: 5;"
+      style=
+            "position: fixed;
+             bottom: 8px;
+             right: 8px;
+             z-index: 5;"
       onclick="location.href='index.html'"
       type="button"
     >
         Archiv
+    </button>
+      
+    <button
+      id="Evaluation"
+      class="button evaluation"
+      onclick="location.href='https://docs.google.com/forms/d/e/1FAIpQLSdo6G_dQJ73HgbhsBQeJsY5zmNKpCARgF61u4VoWIhMerd53g/viewform?usp=sf_link';"
+      type="button"
+    >
+        Evaluation
     </button>
       
     <button
@@ -430,6 +452,8 @@
       "
       onclick="playAudioXX()"
     ></button>
+    
+    
     </body>
 </html>
 
